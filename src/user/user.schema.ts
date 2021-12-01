@@ -26,15 +26,7 @@ export class User {
   address: string;
 
   @Prop()
-  shoppingCart: Product[];
+  shoppingCart: ObjectId[];
 }
-
-export type Product = {
-  id: string;
-  imageUrls: string[];
-  price: number;
-  title: string;
-  description: string;
-};
 
 export const UserSchema = SchemaFactory.createForClass(User);
