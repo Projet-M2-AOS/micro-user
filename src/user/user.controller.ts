@@ -31,11 +31,13 @@ export class UserController {
   }
 
   @Get()
+  @HttpCode(HttpStatus.OK)
   findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Get(':id')
+  @HttpCode(HttpStatus.OK)
   async findOne(@Param('id') id: ObjectId): Promise<User> {
     const user = await this.userService.findOne(id);
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -43,6 +45,7 @@ export class UserController {
   }
 
   @Put(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async update(
     @Param('id') id: ObjectId,
     @Body() updateUserDto: UpdateUserDto,
@@ -66,6 +69,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: ObjectId) {
     let user: User;
     try {
