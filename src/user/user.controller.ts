@@ -9,6 +9,7 @@ import {
   HttpStatus,
   HttpException,
   Put,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -22,13 +23,12 @@ export class UserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createUserDto: CreateUserDto | CreateUserDto[]) {
+  create(
+    @Body(new ParseArrayPipe({ items: CreateUserDto }))
+    createUserDtos: CreateUserDto[],
+  ) {
     try {
-      if (Array.isArray(createUserDto)) {
-        return this.userService.createMany(createUserDto);
-      } else {
-        return this.userService.create(createUserDto);
-      }
+      return this.userService.createMany(createUserDtos);
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
     }
