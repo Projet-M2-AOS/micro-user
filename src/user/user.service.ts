@@ -14,6 +14,10 @@ export class UserService {
     return user.save();
   }
 
+  async createMany(createManyUserDto: CreateUserDto[]): Promise<User[]> {
+    return this.userModel.insertMany(createManyUserDto);
+  }
+
   findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }

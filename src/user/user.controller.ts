@@ -11,7 +11,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateManyUserDto, CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.schema';
 import { ObjectId } from 'mongoose';
@@ -22,11 +22,19 @@ export class UserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createUserDto: CreateUserDto) {
-    try {
-      return this.userService.create(createUserDto);
-    } catch (e) {
-      throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
+  create(@Body() createUserDto: CreateUserDto | CreateUserDto[]) {
+    if (Array.isArray(createUserDto)) {
+      try {
+        return this.userService.createMany(createUserDto);
+      } catch (e) {
+        throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
+      }
+    } else {
+      try {
+        return this.userService.create(createUserDto);
+      } catch (e) {
+        throw new HttpException(e.message, HttpStatus.BAD_REQUEST);
+      }
     }
   }
 
