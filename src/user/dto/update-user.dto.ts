@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString, IsArray } from 'class-validator';
+import { IsOptional, IsString, IsArray, IsDateString } from 'class-validator';
 import { ObjectId } from 'mongoose';
 
 export class UpdateUserDto {
@@ -11,7 +11,7 @@ export class UpdateUserDto {
   lastName?: string;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   birthDate?: Date;
 
   @IsOptional()
