@@ -17,7 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.schema';
 import { ObjectId } from 'mongoose';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
