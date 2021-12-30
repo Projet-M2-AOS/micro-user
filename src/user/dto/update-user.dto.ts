@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsArray, IsDateString } from 'class-validator';
+import { IsOptional, IsString, IsArray, IsDateString, IsUppercase } from 'class-validator';
 import { ObjectId } from 'mongoose';
 
 export class UpdateUserDto {
@@ -36,4 +36,15 @@ export class UpdateUserDto {
   @IsArray()
   @ApiProperty({required:false})
   shoppingCart?: ObjectId[];
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
+  password: string;
+
+  @IsOptional()
+  @IsString()
+  @IsUppercase()
+  @ApiProperty()
+  role: string;
 }

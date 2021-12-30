@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUppercase,
 } from 'class-validator';
 import { ObjectId } from 'mongoose';
 
@@ -42,4 +43,15 @@ export class CreateUserDto {
   @IsArray()
   @ApiProperty({required:false})
   shoppingCart?: ObjectId[];
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsUppercase()
+  @ApiProperty()
+  role: string;
 }

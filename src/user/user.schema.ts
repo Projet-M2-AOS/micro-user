@@ -9,32 +9,40 @@ export class User {
   _id: ObjectId;
 
   @Prop()
-  @ApiProperty({type: String, format: 'mongo-id',})
+  @ApiProperty({ type: String, format: 'mongo-id' })
   firstName: string;
 
   @Prop()
-  @ApiProperty({type: String})
+  @ApiProperty({ type: String })
   lastName: string;
 
   @Prop()
-  @ApiProperty({type: Date})
+  @ApiProperty({ type: Date })
   birthDate: Date;
 
   @Prop()
-  @ApiProperty({type: String})
+  @ApiProperty({ type: String })
   phoneNumber: string;
 
   @Prop()
-  @ApiProperty({type: String})
+  @ApiProperty({ type: String })
   mail: string;
 
   @Prop()
-  @ApiProperty({type: String})
+  @ApiProperty({ type: String })
   address: string;
 
   @Prop()
-  @ApiProperty({type: Array})
+  @ApiProperty({ type: Array })
   shoppingCart: ObjectId[];
+
+  @Prop()
+  @ApiProperty({ type: String })
+  password: string;
+
+  @Prop()
+  @ApiProperty({ type: String })
+  role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
